@@ -1,5 +1,7 @@
 # Ex06 BMI Calculator
-## Date: 
+
+## NAME:Priyadharshini Raja
+## REG NO:212223230160
 
 ## AIM
 To develop a responsive and interactive Body Mass Index (BMI) Calculator using React that allows users to input their height and weight, and calculates their BMI to categorize their health status (e.g., Underweight, Normal, Overweight, Obese).
@@ -64,12 +66,181 @@ Create routing structure with react-router-dom:
 <li>Add styling using CSS or Tailwind.</li>
 
 ## PROGRAM
+## app.jsx
+```
+import React, { useState } from "react";
+import "./App.css";
+
+function App() {
+
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
+  const [bmi, setBmi] = useState("");
+  const [message, setMessage] = useState("");
+
+  const calculateBMI = (e) => {
+    e.preventDefault();
+
+    if (weight === "" || height === "") {
+      alert("Please enter weight and height");
+      return;
+    }
+
+    const bmiValue = (
+      weight / ((height / 100) * (height / 100))
+    ).toFixed(2);
+
+    setBmi(bmiValue);
+
+    if (bmiValue < 18.5) {
+      setMessage("Underweight");
+    } 
+    else if (bmiValue < 24.9) {
+      setMessage("Normal Weight");
+    } 
+    else if (bmiValue < 29.9) {
+      setMessage("Overweight");
+    } 
+    else {
+      setMessage("Obese");
+    }
+  };
+
+  return (
+    <div className="container">
+
+      <div className="card">
+
+        <h1>BMI Calculator</h1>
+
+        <form onSubmit={calculateBMI}>
+
+          <input
+            type="number"
+            placeholder="Enter Weight in Kg"
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+          />
+
+          <input
+            type="number"
+            placeholder="Enter Height in cm"
+            value={height}
+            onChange={(e) => setHeight(e.target.value)}
+          />
+
+          <button type="submit">
+            Calculate BMI
+          </button>
+
+        </form>
+
+        {bmi && (
+          <div className="result">
+
+            <h2 style={{ color: "black" }}>
+              Your BMI: {bmi}
+            </h2>
+
+            <h3 style={{ color: "green" }}>
+              {message}
+            </h3>
+
+          </div>
+        )}
+
+      </div>
+
+    </div>
+  );
+}
+
+export default App;
+```
+## app.css
+```
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #ffd6e8, #e0c3fc);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.card {
+  background: #fffafc;
+  padding: 35px;
+  width: 380px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+  color: #7b68ee;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 90%;
+  padding: 14px;
+  margin: 12px 0;
+  border-radius: 12px;
+  border: 2px solid #e8d5ff;
+  font-size: 16px;
+  outline: none;
+  background: #faf5ff;
+}
+
+input:focus {
+  border-color: #b185db;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background: #cdb4db;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #b185db;
+  transform: scale(1.03);
+}
+
+.result {
+  margin-top: 20px;
+  background: #f8f4ff;
+  padding: 18px;
+  border-radius: 15px;
+  border: 2px solid #e8d5ff;
+}
+
+.result h2 {
+  color: #6a5acd;
+}
+
+.result h3 {
+  color: #4caf50;
+}
+```
 
 
 
 ## OUTPUT
 
-
+<img width="1917" height="1069" alt="image" src="https://github.com/user-attachments/assets/498efe37-c4c1-46ec-9bab-5f5608118c84" />
 
 
 ## RESULT
